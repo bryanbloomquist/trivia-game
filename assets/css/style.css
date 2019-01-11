@@ -27,21 +27,28 @@ body {
 }
 
 @media screen and (max-width: 640px) {
-body {
-    background: url("../images/background-sm.jpg");
-    background-size: cover;
-    width: 400px;
-    margin: 100px auto;
-    position: relative;
-}
+    body {
+        background: url("../images/background-sm.jpg");
+        background-size: cover;
+        width: 400px;
+        margin: 50px auto;
+        position: relative;
+    }
 
-#playZone {
-    position: relative;
-    margin: 0;
-    clear: both;
-    width: 400px;
-}
+    #playZone {
+        position: fixed;top:0;left:0;
+        margin-top: 125px;
+        margin-left: 25px;
+        clear: both;
+        width: 90%;
+    }
 
-#countdownTimer {
-    position: absolute;
+    #countdownTimer {
+        position: fixed;top:-25;left:0;
+        margin: 0 30px;
+    }
+
+    img {
+        width: 100%;
+    }
 }

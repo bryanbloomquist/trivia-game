@@ -199,7 +199,7 @@ $(document).ready(function(){
         prepQ();
         timer();
         $("#playZone").html(
-            "<form id= 'quiz'>"+
+            "<form id='quiz'>"+
             currentQ+"<br>"+
             "<input type='radio' name='answer' value='"+answerArray[0].value+"'>"+answerArray[0].answer+"<br>"+
             "<input type='radio' name='answer' value='"+answerArray[1].value+"'>"+answerArray[1].answer+"<br>"+
