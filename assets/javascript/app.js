@@ -81,7 +81,7 @@ var questionArray = [
         }]
     },
     question = {
-        question: 'In Fallout 2 you meet King Arthurs knights; what mission do they ask of you?',
+        question: 'In Fallout 2 you meet King Arthur; what mission does he ask of you?',
         answer: [{
             value: true, answer: 'Find the Holy Hand Grenade of Antioch.',
         },{ value: false, answer: 'Bring back a shrubbery.',
@@ -123,6 +123,7 @@ var correctGuess = 0;
 var wrongGuess = 0;
 var intervalId = 0;
 var currentQ = [];
+var tempArray = [];
 var answerArray = [];
 var isCorrect = "";
 var theRightOne = "";
@@ -141,7 +142,9 @@ $(document).ready(function(){
         $("#countdownTimer").html("<h1>"+number+"</h2>");
         if (number===0){
             stop();
-            incorrectAnswer();
+            wrongGuess++;
+            $("#playZone").empty().html("<h4>The correct answer is: "+theRightOne+"</h4>");
+            setTimeout(loadQ, 3000);
         }
     }
 
@@ -154,11 +157,12 @@ $(document).ready(function(){
     // Initial Game Load
     function loadGame(){
         $("#playZone").empty();
+        tempArray = questionArray.slice(0);
         $("#playZone").html("<img src='assets/images/logo.png' alt='game logo'>")
         $("#playZone").append(
             $('<button/>',{
                 text: "Begin",
-                class: "btn btn-success btn-lg mt-5",
+                class: "btn btn-success btn-lg ml-5 mt-5",
                 id: "gameButton",
                 click: function(){
                     loadQ();}
@@ -181,27 +185,27 @@ $(document).ready(function(){
 
     // Prepare the question format
     function prepQ(){
-        currentQ = questionArray[0].question;
-        answerArray = questionArray[0].answer;
+        currentQ = tempArray[0].question;
+        answerArray = tempArray[0].answer;
         theRightOne = answerArray[0].answer;
-        console.log(theRightOne);
-        questionArray.shift();
+        tempArray.shift();
         answerArray =  shuffle(answerArray);
     }
 
     // Load the question
     function loadQ(){
         $("#playZone").empty();
+        $("#countdownTimer").html("<h1>"+number+"</h1>");
         prepQ();
         timer();
         $("#playZone").html(
             "<form id= 'quiz'>"+
-            "<h4>"+currentQ+"</h4><br>"+
+            currentQ+"<br>"+
             "<input type='radio' name='answer' value='"+answerArray[0].value+"'>"+answerArray[0].answer+"<br>"+
             "<input type='radio' name='answer' value='"+answerArray[1].value+"'>"+answerArray[1].answer+"<br>"+
             "<input type='radio' name='answer' value='"+answerArray[2].value+"'>"+answerArray[2].answer+"<br>"+
             "<input type='radio' name='answer' value='"+answerArray[3].value+"'>"+answerArray[3].answer+"<br>"+
-            "<input type='button' class='btn btn-success mt-3' id='submit' value='submit'>"+
+            "<input type='button' class='btn btn-success mt-1' id='submit' value='submit'>"+
             "</form>"
         )
     }
@@ -209,25 +213,56 @@ $(document).ready(function(){
     // Check to see if answer is correct
     $(document).on("click","#submit", function checkAnswer(){
         stop();
+        $("#countdownTimer").empty();
         isCorrect = $('input[name=answer]:checked').val()
-        console.log(isCorrect);
-            if (isCorrect === "true") {
+            if (isCorrect === "true" && tempArray.length > 0) {
                 correctGuess++;
-                loadQ();
+                $("#playZone").empty().html("<h4>Correct</h4>");
+                setTimeout(loadQ, 1000);
+            } else if (isCorrect === "true" && tempArray.length === 0) {
+                correctGuess++;
+                $("#playZone").empty().html("<h4>Correct</h4>");
+                setTimeout(gameOver, 1000);
+            } else if (isCorrect === "false" && tempArray.length > 0) {
+                wrongGuess++;
+                $("#playZone").empty().html("<h4>The correct answer is: "+theRightOne+"</h4>");
+                setTimeout(loadQ, 3000);
             } else {
                 wrongGuess++;
-                incorrectAnswer();
+                $("#playZone").empty().html("<h4>The correct answer is: "+theRightOne+"</h4>");
+                setTimeout(gameOver, 3000);
             }
-            console.log(correctGuess);
-            console.log(wrongGuess);
         })
 
-    //if the answer is incorrect or the timer runs out
-    function incorrectAnswer () {
+    // End of game function
+    function gameOver() {
         $("#playZone").empty().html(
-            "<h4>The correct answer was: "+theRightOne+"</h4>"
+            "<h4>Great Game!</h4>"+
+            "<h4>You Got "+correctGuess+" Correct.</h4>"+
+            "<h4>You Got "+wrongGuess+" Wrong.</h4>"
         );
-        setTimeout(loadQ, 3000);
+        $("#playZone").append(
+            $('<button/>',{
+                text: "Play Again",
+                class: "btn btn-success btn-lg mt-3",
+                id: "gameButton",
+                click: function(){
+                    reset();}
+            })
+        );
+    }
+
+    // Restart Game
+    function reset() {
+        number = 30;
+        correctGuess = 0;
+        wrongGuess = 0;
+        intervalId = 0;
+        currentQ = [];
+        answerArray = [];
+        isCorrect = "";
+        theRightOne = "";
+        loadGame();
     }
         
         

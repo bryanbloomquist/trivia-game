@@ -1,15 +1,16 @@
 @font-face {
     font-family: fallout;
-    src: url(../fonts/fallout3.TTF);
+    src: url(../fonts/fallout1.TTF);
 }
 
 body {
     background: url("../images/background.jpg") no-repeat center fixed;
     background-size: cover;
-    color: #7d7;
+    color: #6f7;
     width: 400px;
     margin: 125px auto;
     position: relative;
+    font-family: fallout;
 }
 
 #playZone {
@@ -21,15 +22,14 @@ body {
 
 #countdownTimer {
     position: absolute;
-    margin-left: 425px;
-    margin-top: 375px;
+    margin-left: 415px;
+    margin-top: 395px;
 }
 
 @media screen and (max-width: 640px) {
 body {
     background: url("../images/background-sm.jpg");
     background-size: cover;
-    color: #7d7;
     width: 400px;
     margin: 100px auto;
     position: relative;
