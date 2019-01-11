@@ -1,0 +1,47 @@
+@font-face {
+    font-family: fallout;
+    src: url(../fonts/fallout3.TTF);
+}
+
+body {
+    background: url("../images/background.jpg") no-repeat center fixed;
+    background-size: cover;
+    color: #7d7;
+    width: 400px;
+    margin: 125px auto;
+    position: relative;
+}
+
+#playZone {
+    position: absolute;
+    margin-left: 120px;
+    clear: both;
+    width: 360px;
+}
+
+#countdownTimer {
+    position: absolute;
+    margin-left: 425px;
+    margin-top: 375px;
+}
+
+@media screen and (max-width: 640px) {
+body {
+    background: url("../images/background-sm.jpg");
+    background-size: cover;
+    color: #7d7;
+    width: 400px;
+    margin: 100px auto;
+    position: relative;
+}
+
+#playZone {
+    position: relative;
+    margin: 0;
+    clear: both;
+    width: 400px;
+}
+
+#countdownTimer {
+    position: absolute;
+}

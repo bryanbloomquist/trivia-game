@@ -1,6 +1,6 @@
 var questionArray = [
     question = {
-        question: 'What year was Fallout released?', 
+        question: 'What year was the original Fallout released?', 
         answer: [{
             value: true, answer: '1997', 
         },{ value: false, answer: '1999', 
@@ -18,12 +18,12 @@ var questionArray = [
         }]
     },
     question = {
-        question: 'In Fallout you play the Vault Dweller, what vault are you from?',
+        question: 'In the first Fallout game you play the Vault Dweller; what vault are you from?',
         answer: [{
-            value: true, answer: '13',
-        },{ value: false, answer: '101',
-        },{ value: false, answer: '76',
-        },{ value: false, answer: '42'
+            value: true, answer: 'Vault 13',
+        },{ value: false, answer: 'Vault 101',
+        },{ value: false, answer: 'Vault 76',
+        },{ value: false, answer: 'Vault 42'
         }]
     },
     question = {
@@ -45,7 +45,7 @@ var questionArray = [
         }]
     },
     question = {
-        question: 'The first Fallout has a time limit to prevent exp grinding, how much in-game time do you initially have to complete your mission?',
+        question: 'The first Fallout has a time limit to prevent experience grinding; how much in-game time do you initially have to complete your mission?',
         answer: [{
             value: true, answer: '150 days',
         },{ value: false, answer: '48 hours',
@@ -54,7 +54,7 @@ var questionArray = [
         }]
     },
     question = {
-        question: "The VATS (Vault-Tec Assisted Targeting System) let you target certain body parts in Fallout 1 and 2 that you couldn't in later games, which body parts are they?",
+        question: "The Vault-Tec Assisted Targeting System (VATS) let you target certain body parts in Fallout 1 and 2 that you couldn't in later games, which body parts are they?",
         answer: [{
             value: true, answer: 'Eyes and Groin',
         },{ value: false, answer: 'Neck and Eyes',
@@ -81,16 +81,16 @@ var questionArray = [
         }]
     },
     question = {
-        question: 'In Fallout 2 you meet King Arthurs knights, what mission do they ask of you?',
+        question: 'In Fallout 2 you meet King Arthurs knights; what mission do they ask of you?',
         answer: [{
             value: true, answer: 'Find the Holy Hand Grenade of Antioch.',
-        },{ value: false, answer: 'Fetch a shrubbery.',
+        },{ value: false, answer: 'Bring back a shrubbery.',
         },{ value: false, answer: 'Retrieve the Holy Grail at Castle Aaargh.',
-        },{ value: false, answer: 'Spank the virgins.'
+        },{ value: false, answer: 'Build a giant wooden rabbit.'
         }]
     },
     question = {
-        question: 'What creature can you not have as a companion in Fallout 2?',
+        question: 'Which creature can you not have as a companion in Fallout 2?',
         answer: [{
             value: true, answer: 'Mr. Handy.',
         },{ value: false, answer: 'Deathclaw.',
@@ -99,7 +99,7 @@ var questionArray = [
         }]
     },
     question = {
-        question: 'What is the name of the car you can fix up and drive thru the wasteland?',
+        question: 'What is the name of the car you can fix up and drive in Fallout 2?',
         answer: [{
             value: true, answer: 'Highwayman',
         },{ value: false, answer: 'Journeyman',
@@ -108,12 +108,12 @@ var questionArray = [
         }]
     },
     question = {
-        question: 'Fallout 2 breaks the fourth wall many times, which one of these is not in the game?',
+        question: 'Fallout 2 breaks the fourth wall many times; which one of these is "not" in the game?',
         answer: [{
             value: true, answer: 'PC: "Are you sure you should still be playing, its getting really late?',
         },{ value: false, answer: 'NPC: "You look like you belong in a battle mech computer game. This is Fallout 2"',
         },{ value: false, answer: 'PC: "I am the player character of this game."',
-        },{ value: false, answer: 'A NPC give your character the Fallout 2 Hintbook.'
+        },{ value: false, answer: 'An NPC gives your character the Fallout 2 Hintbook.'
         }]
     }
 ];
@@ -124,7 +124,8 @@ var wrongGuess = 0;
 var intervalId = 0;
 var currentQ = [];
 var answerArray = [];
-
+var isCorrect = "";
+var theRightOne = "";
 
 $(document).ready(function(){
 
@@ -147,15 +148,17 @@ $(document).ready(function(){
     // Stop the timer
     function stop(){
         clearInterval(intervalId);
+        number = 30;
     }
 
     // Initial Game Load
     function loadGame(){
         $("#playZone").empty();
+        $("#playZone").html("<img src='assets/images/logo.png' alt='game logo'>")
         $("#playZone").append(
             $('<button/>',{
                 text: "Begin",
-                class: "btn btn-success btn-lg m-auto",
+                class: "btn btn-success btn-lg mt-5",
                 id: "gameButton",
                 click: function(){
                     loadQ();}
@@ -180,6 +183,8 @@ $(document).ready(function(){
     function prepQ(){
         currentQ = questionArray[0].question;
         answerArray = questionArray[0].answer;
+        theRightOne = answerArray[0].answer;
+        console.log(theRightOne);
         questionArray.shift();
         answerArray =  shuffle(answerArray);
     }
@@ -190,23 +195,42 @@ $(document).ready(function(){
         prepQ();
         timer();
         $("#playZone").html(
-            "<form name = 'quiz'>"+
-            "<h3>"+currentQ+"</h3><br>"+
+            "<form id= 'quiz'>"+
+            "<h4>"+currentQ+"</h4><br>"+
             "<input type='radio' name='answer' value='"+answerArray[0].value+"'>"+answerArray[0].answer+"<br>"+
             "<input type='radio' name='answer' value='"+answerArray[1].value+"'>"+answerArray[1].answer+"<br>"+
             "<input type='radio' name='answer' value='"+answerArray[2].value+"'>"+answerArray[2].answer+"<br>"+
             "<input type='radio' name='answer' value='"+answerArray[3].value+"'>"+answerArray[3].answer+"<br>"+
-            "<input type='button' value='submit' onclick='"+checkAnswer()+"'><br>"+
+            "<input type='button' class='btn btn-success mt-3' id='submit' value='submit'>"+
             "</form>"
         )
     }
 
     // Check to see if answer is correct
-    function checkAnswer(){
+    $(document).on("click","#submit", function checkAnswer(){
+        stop();
+        isCorrect = $('input[name=answer]:checked').val()
+        console.log(isCorrect);
+            if (isCorrect === "true") {
+                correctGuess++;
+                loadQ();
+            } else {
+                wrongGuess++;
+                incorrectAnswer();
+            }
+            console.log(correctGuess);
+            console.log(wrongGuess);
+        })
 
+    //if the answer is incorrect or the timer runs out
+    function incorrectAnswer () {
+        $("#playZone").empty().html(
+            "<h4>The correct answer was: "+theRightOne+"</h4>"
+        );
+        setTimeout(loadQ, 3000);
     }
-
-
+        
+        
 loadGame();
 
 
