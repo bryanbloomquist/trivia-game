@@ -1,54 +1,75 @@
 @font-face {
     font-family: fallout;
-    src: url(../fonts/fallout1.TTF);
+    src: url(../fonts/fallout2.TTF);
 }
 
 body {
-    background: url("../images/background.jpg") no-repeat center fixed;
+    background: url("../images/background.png") no-repeat center fixed;
     background-size: cover;
     color: #6f7;
-    width: 400px;
-    margin: 125px auto;
+    width: 600px;
+    margin: 100px auto;
     position: relative;
     font-family: fallout;
 }
 
+#main {
+    background-image: url("../images/pip-boy.jpg");
+    width: 600px;
+    height: 493px;
+}
+
 #playZone {
     position: absolute;
-    margin-left: 120px;
-    clear: both;
-    width: 360px;
+    margin-left: 225px;
+    margin-top: 50px;
+    width: 320px;
 }
 
 #countdownTimer {
     position: absolute;
-    margin-left: 415px;
-    margin-top: 395px;
+    margin-left: 475px;
+    margin-top: 410px;
+}
+
+@media screen and (max-width: 768px) {
+    #main {
+        background-size: contain;
+    }
+    #playZone {
+        margin-left: 200px;
+        width: 300px;
+    }
+    #logo {
+        width: 300px;
+    }
+    #countdownTimer {
+        margin-left: 450px;
+        margin-top: 380px;
+    }
 }
 
 @media screen and (max-width: 640px) {
     body {
-        background: url("../images/background-sm.jpg");
-        background-size: cover;
         width: 400px;
-        margin: 50px auto;
-        position: relative;
+        height: 675px;
+        background-size: auto;
+        margin: 20px auto;
     }
-
+    #main {
+        background-image: url("../images/background-sm.jpg");
+        width: 400px;
+        height: 675px;
+    }
     #playZone {
-        position: fixed;top:0;left:0;
-        margin-top: 125px;
-        margin-left: 25px;
-        clear: both;
-        width: 90%;
+        margin-left: 10px;
+        width: 340px;
     }
-
+    #logo {
+        width: 340px;
+    }
     #countdownTimer {
-        position: fixed;top:-25;left:0;
-        margin: 0 30px;
-    }
-
-    img {
-        width: 100%;
+        margin-left: 300px;
+        margin-top: 425px;
     }
 }

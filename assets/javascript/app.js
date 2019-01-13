@@ -158,11 +158,11 @@ $(document).ready(function(){
     function loadGame(){
         $("#playZone").empty();
         tempArray = questionArray.slice(0);
-        $("#playZone").html("<img src='assets/images/logo.png' alt='game logo'>")
+        $("#playZone").html("<img id='logo' src='assets/images/logo.png' alt='game logo'>")
         $("#playZone").append(
             $('<button/>',{
                 text: "Begin",
-                class: "btn btn-success btn-lg ml-5 mt-5",
+                class: "btn btn-success btn-lg ml-3 mt-5",
                 id: "gameButton",
                 click: function(){
                     loadQ();}
@@ -212,6 +212,7 @@ $(document).ready(function(){
 
     // Check to see if answer is correct
     $(document).on("click","#submit", function checkAnswer(){
+        console.log(tempArray);
         stop();
         $("#countdownTimer").empty();
         isCorrect = $('input[name=answer]:checked').val()
