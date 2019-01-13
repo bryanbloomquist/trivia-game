@@ -170,9 +170,10 @@ $(document).ready(function(){
         );
     }
 
-    // Shuffle answer array
+    // Set the shuffle function
     function shuffle(array){
-        var currentIndex = array.length, temporaryValue, randomIndex;
+        var currentIndex = array.length;
+        var temporaryValue, randomIndex;
         while(0 !== currentIndex){
             randomIndex = Math.floor(Math.random()*currentIndex);
             currentIndex -= 1;
@@ -259,10 +260,6 @@ $(document).ready(function(){
         correctGuess = 0;
         wrongGuess = 0;
         intervalId = 0;
-        currentQ = [];
-        answerArray = [];
-        isCorrect = "";
-        theRightOne = "";
         loadGame();
     }
         
