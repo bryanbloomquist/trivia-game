@@ -86,7 +86,7 @@ var questionArray = [
     }
 ];
 
-var number = 30;
+var timer = 30;
 var correctGuess = 0;
 var wrongGuess = 0;
 var intervalId = 0;
@@ -108,30 +108,22 @@ $(document).ready(function(){
 
     // Run the countdown
     function decrement(){
-        number--;
-        $("#countdownTimer").html("<h1>"+number+"</h2>");
-        if (number===0 && questionNum < rounds){
+        timer--;
+        $("#countdownTimer").html("<h1>"+timer+"</h2>");
+        if (timer === 0){
             stopTimer();
-            wrongGuess++;
-            questionNum++;
-            $("#playZone").empty().html("<h4>The correct answer is: "+theRightOne+"</h4>");
-            setTimeout(loadQuestion, 3000);
-        }
-        else if (number===0 && questionNum === rounds){
-            stopTimer();
-            wrongGuess++;
-            $("#playZone").empty().html("<h4>The correct answer is: "+theRightOne+"</h4>");
-            setTimeout(gameOver, 3000);
+            userWrong();
+            gameContinue();
         }
     }
 
     // Stop the timer
     function stopTimer(){
         clearInterval(intervalId);
-        number = 30;
+        timer = 30;
     }
 
-    // Initial Game Load
+    // Load up the start game screen
     function loadGame(){
         $("#playZone").empty();
         $("#playZone").html("<img id='logo' src='assets/images/logo.png' alt='game logo'>")
@@ -172,7 +164,7 @@ $(document).ready(function(){
     // Load the question
     function loadQuestion(){
         $("#playZone").empty();
-        $("#countdownTimer").html("<h1>"+number+"</h1>");
+        $("#countdownTimer").html("<h1>"+timer+"</h1>");
         prepQuestion();
         startTimer();
         $("#playZone").html(
@@ -190,34 +182,54 @@ $(document).ready(function(){
     // Check to see if answer is correct
     $(document).on("click","#submit", function checkAnswer(){
         stopTimer();
-        questionNum++;
-        $("#countdownTimer").empty();
         userGuess = $('input[name=answer]:checked').val()
-            if (userGuess === theRightOne && questionNum < rounds){
-                correctGuess++;
-                $("#playZone").empty().html("<h4>Correct</h4><br>").append("<img src="+currentImage+" style='width:100%'>");
-                setTimeout(loadQuestion, 2000);
-            } else if (userGuess === theRightOne && questionNum === rounds) {
-                correctGuess++;
-                $("#playZone").empty().html("<h4>Correct</h4>");
-                setTimeout(gameOver, 1000);
-            } else if (userGuess !== theRightOne && questionNum < rounds) {
-                wrongGuess++;
-                $("#playZone").empty().html("<h4>The correct answer is: "+theRightOne+"</h4>");
-                setTimeout(loadQuestion, 3000);
+            if (userGuess === theRightOne){
+                userCorrect();
+                gameContinue();
             } else {
-                wrongGuess++;
-                $("#playZone").empty().html("<h4>The correct answer is: "+theRightOne+"</h4>");
-                setTimeout(gameOver, 3000);
+                userWrong();
+                gameContinue();
             }
         })
 
+    // The guess is correct
+    function userCorrect() {
+        questionNum++;
+        correctGuess++;
+        $("#playZone, #countdownTimer").empty()
+        $("#playZone").html("<h4>Correct</h4><br>"+
+            "<img src="+currentImage+" style='width:100%'>");
+    }
+
+    // The guess is incorrect
+    function userWrong() {
+        questionNum++;
+        wrongGuess++;
+        $("#playZone, #countdownTimer").empty();
+        $("#playZone").html("<h4>The correct answer is: "+theRightOne+"</h4>"+
+            "<img src="+currentImage+" style='width:100%'>");
+    }
+
+    // Is there more questions
+    function gameContinue() {
+        if (questionNum < rounds) {
+            setTimeout(loadQuestion, 2000);
+        } else if (questionNum === rounds) {
+            setTimeout(gameOver, 2000);
+        }
+    }
+
     // End of game function
     function gameOver() {
+        if (correctGuess >= wrongGuess){
+            currentImage = "assets/images/goodEnding.gif";
+        } else if (correctGuess < wrongGuess) {
+            currentImage = "assets/images/badEnding.jpg";
+        }
         $("#playZone").empty().html(
-            "<h4>Great Game!</h4>"+
             "<h4>You Got "+correctGuess+" Correct.</h4>"+
-            "<h4>You Got "+wrongGuess+" Wrong.</h4>"
+            "<h4>You Got "+wrongGuess+" Wrong.</h4>"+
+            "<img src="+currentImage+" style='width:100%'>"
         );
         $("#playZone").append(
             $('<button/>',{
@@ -232,7 +244,7 @@ $(document).ready(function(){
 
     // Restart Game
     function reset() {
-        number = 30;
+        timer = 30;
         questionNum = 0;
         correctGuess = 0;
         wrongGuess = 0;
