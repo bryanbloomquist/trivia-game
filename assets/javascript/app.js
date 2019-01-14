@@ -170,10 +170,10 @@ $(document).ready(function(){
         $("#playZone").html(
             "<form id='quiz'>"+
             currentQuestion+"<br>"+
-            "<input type='radio' name='answer' class='options' value='"+answerArray[0]+"'>"+answerArray[0]+"<br>"+
-            "<input type='radio' name='answer' class='options' value='"+answerArray[1]+"'>"+answerArray[1]+"<br>"+
-            "<input type='radio' name='answer' class='options' value='"+answerArray[2]+"'>"+answerArray[2]+"<br>"+
-            "<input type='radio' name='answer' class='options' value='"+answerArray[3]+"'>"+answerArray[3]+"<br>"+
+            "<input type='radio' name='answer' class='pl-2' value='"+answerArray[0]+"'>"+answerArray[0]+"<br>"+
+            "<input type='radio' name='answer' class='pl-2' value='"+answerArray[1]+"'>"+answerArray[1]+"<br>"+
+            "<input type='radio' name='answer' class='pl-2' value='"+answerArray[2]+"'>"+answerArray[2]+"<br>"+
+            "<input type='radio' name='answer' class='pl-2' value='"+answerArray[3]+"'>"+answerArray[3]+"<br>"+
             "<input type='button' class='btn btn-success mt-1' id='submit' value='submit'>"+
             "</form>"
         )
@@ -206,7 +206,8 @@ $(document).ready(function(){
         questionNum++;
         wrongGuess++;
         $("#playZone, #countdownTimer").empty();
-        $("#playZone").html("<h4>The correct answer is: "+theRightOne+"</h4>"+
+        $("#playZone").html("<h4>The correct answer is:</h4>"+
+            "<h4>"+theRightOne+"</h4>"+
             "<img src="+currentImage+" style='width:100%'>");
     }
 
