@@ -170,10 +170,10 @@ $(document).ready(function(){
         $("#playZone").html(
             "<form id='quiz'>"+
             currentQuestion+"<br>"+
-            "<input type='radio' name='answer' class='pl-2' value='"+answerArray[0]+"'>"+answerArray[0]+"<br>"+
-            "<input type='radio' name='answer' class='pl-2' value='"+answerArray[1]+"'>"+answerArray[1]+"<br>"+
-            "<input type='radio' name='answer' class='pl-2' value='"+answerArray[2]+"'>"+answerArray[2]+"<br>"+
-            "<input type='radio' name='answer' class='pl-2' value='"+answerArray[3]+"'>"+answerArray[3]+"<br>"+
+            "<input type='radio' name='answer' class='options' value='"+answerArray[0]+"'>"+answerArray[0]+"<br>"+
+            "<input type='radio' name='answer' class='options' value='"+answerArray[1]+"'>"+answerArray[1]+"<br>"+
+            "<input type='radio' name='answer' class='options' value='"+answerArray[2]+"'>"+answerArray[2]+"<br>"+
+            "<input type='radio' name='answer' class='options' value='"+answerArray[3]+"'>"+answerArray[3]+"<br>"+
             "<input type='button' class='btn btn-success mt-1' id='submit' value='submit'>"+
             "</form>"
         )
