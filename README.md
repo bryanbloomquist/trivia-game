@@ -1,3 +1,5 @@
+Deployed Site => https://bryanbloomquist.github.io/trivia-game/index.html
+
 # TriviaGame
 
 ### Before You Begin
