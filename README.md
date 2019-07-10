@@ -1,4 +1,4 @@
-# Trivia Game
+# TriviaGame
 
 
 Deployed Site: [bryanbloomquist.com/trivia-game](https://bryanbloomquist.com/trivia-game)
