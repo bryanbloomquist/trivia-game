@@ -16,10 +16,12 @@ var questionArray = [
         image: 'assets/images/question3.jpg'
     },{
         question: 'What is your primary mission in Fallout?',
-        answers: ['Find a replacement waterchip.', 
+        answers: [
+            'Find a replacement waterchip.', 
             'Find a non-mutant companion.', 
             'Find a new settlement for your people.',
-            'Try not to die.'],
+            'Try not to die.'
+        ],
         correct: 'Find a replacement waterchip.',
         image: 'assets/images/question4.jpg'
     },{
@@ -43,7 +45,8 @@ var questionArray = [
             'Strength, Perception, Endurance, Charisma, Intelligence, Agility, Luck',
             'Strength, Perseverance, Endurance, Character, Investigation, Ability, Looks',
             'Style, Probability, Elevation, Charm, Interpersonal Relationships, Acrimony, Lying',
-            'Stealth, Probability, Enchantment, Chemistry, Investigation, Alchemy, Law'],
+            'Stealth, Probability, Enchantment, Chemistry, Investigation, Alchemy, Law'
+        ],
         correct: 'Strength, Perception, Endurance, Charisma, Intelligence, Agility, Luck',
         image: 'assets/images/question8.jpg'
     },{
@@ -52,7 +55,8 @@ var questionArray = [
             'Creating the super mutants.',
             'Destroying civilization.',
             '"Evolving" humanity into ghouls.',
-            'Manifesting super hero powers.'],
+            'Manifesting super hero powers.'
+        ],
         correct: 'Creating the super mutants.',
         image: 'assets/images/question9.jpg'
     },{
@@ -61,7 +65,8 @@ var questionArray = [
             'Find the Holy Hand Grenade of Antioch.',
             'Bring back a shrubbery.',
             'Retrieve the Holy Grail at Castle Aaargh.',
-            'Build a giant wooden rabbit.'],
+            'Build a giant wooden rabbit.'
+        ],
         correct: 'Find the Holy Hand Grenade of Antioch.',
         image: 'assets/images/question10.jpg'
     },{
@@ -80,7 +85,8 @@ var questionArray = [
             'NPC: "Your nocturnal perseverance has earned you a hidden gaming tip. GO TO BED!"',
             'NPC: "You look like you belong in a battle mech computer game. This is Fallout 2"',
             'PC: "I am the player character of this game."',
-            'An NPC gives your character the Fallout 2 Hintbook.'],
+            'An NPC gives your character the Fallout 2 Hintbook.'
+        ],
         correct: 'NPC: "Your nocturnal perseverance has earned you a hidden gaming tip. GO TO BED!"',
         image: 'assets/images/question13.jpg'
     }
